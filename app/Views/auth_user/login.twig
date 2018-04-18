@@ -1,0 +1,60 @@
+{% extends 'layouts/main.twig' %}
+{% block content %}
+<main class="main-part">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-7"></div>
+			<div class="col-md-5 asd">
+				<div class="login-panel">
+					<div class="color row">
+						<div class="col"></div>
+						<div class="col"></div>
+						<div class="col"></div>
+						<div class="col"></div>
+						<div class="col"></div>
+						<div class="col"></div>
+						<div class="col"></div>
+					</div>
+					<!-- Form login -->
+					{% include 'partials/flash.twig' %}
+					<form action="{{ path_for('auth.login') }}"  method="post">
+						<div class="md-form">
+							<input type="text" id="defaultForm-username" name="email" class="form-control">
+							<label for="defaultForm-username">E-mail</label>
+						</div>
+						<div class="md-form">
+							<input type="password" id="defaultForm-pass" name="password" class="form-control">
+							<label for="defaultForm-pass">Şifrə</label>
+						</div>
+						<div>
+							<table>
+								<tr>
+									<td>
+										<input type="checkbox" name="rememberme" id="rememberme">
+									</td>
+									<td>
+										<a href="#">
+										<label for="rememberme">Yadda saxla</label></a>
+									</td>
+									<td>
+										<a href="#">Şifrəni unutmusan?</a>
+									</td>
+								</tr>
+							</table>
+						</div>
+						<div class="text-center">
+							<button type="submit">
+							Daxil ol
+							</button>
+							<a href="{{ path_for('auth.signup.step_one') }}" id="registration">
+							Qeydiyyat
+							</a>
+						</div>
+					</form>
+					<!-- Form login -->
+				</div>
+			</div>
+		</div>
+	</div>
+</main>
+{% endblock %}

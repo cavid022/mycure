@@ -1,0 +1,115 @@
+{% extends 'layouts/main.twig' %}
+{% block content %}
+<main class="main-part">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7"></div>
+            <div class="col-md-5 asd">
+                <div class="register-panel">
+                    <!-- Form login -->
+                    <div class="color row">
+                        <div class="col"></div>
+                        <div class="col"></div>
+                        <div class="col"></div>
+                        <div class="col"></div>
+                        <div class="col"></div>
+                        <div class="col"></div>
+                        <div class="col"></div>
+                    </div>
+                        <form action="{{ path_for('doctor.auth.signup.step_one.post') }}" method="post">
+                            <div class="demo clinics">
+                              <div class="mdl-selectfield">
+                                <select class="browser-default" name="hospital_id" value="{{ old.hospital_id }}"id="hospitals">
+                                  <option value="" disabled selected>Klinikalar</option>
+                                    {% for hospital in hospitals %}
+                                    <option value="{{ hospital.id }}">{{ hospital.name }}</option>
+                                    {% endfor %}
+                                </select>
+                              </div>
+                            </div>
+                            <div class="demo rooms">
+                              <div class="mdl-selectfield">
+                                <select class="browser-default" name="department_id" id="list">
+                                  <option value="" disabled selected>Şöbələr</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="md-form">
+                                <input type="number" id="defaultForm-id" name="assigned_id" value="{{ old.assigned_id }}" class="form-control">
+                                <label for="defaultForm-id">ID</label>
+                            </div>
+                            <div class="md-form">
+                                <input type="text" id="defaultForm-usname" name="first_name" value="{{ old.first_name }}" class="form-control">
+                                <label for="defaultForm-usname">Adı</label>
+    							{% if errors.first_name %} <span class="help-block">{{ errors.first_name | first }}</span> {% endif %}
+                            </div>
+                            <div class="md-form">
+                                <input type="text" id="defaultForm-lastname" name=last_name value="{{ old.last_name }}" class="form-control">
+                                <label for="defaultForm-lastname">Soyadı</label>
+    							{% if errors.last_name %} <span class="help-block">{{ errors.last_name | first }}</span> {% endif %}
+                            </div>
+                            <div class="md-form">
+                                <input type="text" id="defaultForm-email" name="email" value="{{ old.email }}" class="form-control">
+                                <label for="defaultForm-email">E-mail</label>
+    							{% if errors.email %} <span class="help-block">{{ errors.email | first }}</span> {% endif %}
+
+                            </div>
+                            <div class="md-form">
+                                <input type="password" id="defaultForm-pass" name="password" class="form-control">
+                                <label for="defaultForm-pass">
+                                    Şifrə
+                                </label>
+    							{% if errors.password %} <span class="help-block">{{ errors.password | first }}</span> {% endif %}
+
+                            </div>
+                            <div class="md-form">
+                                <input type="password" id="defaultForm-pass" name="confirm_password" class="form-control">
+                                <label for="defaultForm-pass">Təkrar şifrə</label>
+                                {% if errors.confirm_password %} <span class="help-block">{{ errors.confirm_password | first }}</span> {% endif %}
+
+                            </div>
+                            <div class="text-center">
+                                    <a href="{{ path_for('auth.signup.step_one') }}" id="asdoctor">
+                                        Pasient kimi
+                                    </a>
+                                    <button type="submit" id="next-registration">
+                                        Növbəti
+                                    </a>
+                            </div>
+                            <div class="ready-account">
+                                <span>Hesabınız var?</span>
+                                <a href="{{ path_for('auth.login') }}">Daxil olun</a>
+                            </div>
+                        </form>
+                        <!-- Form login -->
+                </div>
+            </div>
+        </div>
+    </div>
+</main> 
+{% endblock %}
+
+{% block footer_scripts %}
+<script>
+$(document).ready(function() {
+    function load_data(query) {
+        $.ajax({
+            url: "{{ path_for('departments_by_name.ajax') }}",
+            method: "POST",
+            data: {
+                query: query
+            },
+            success: function(data) {
+                $('#list').html(data);
+            }
+        });
+    }
+    $('#hospitals').on('change',function() {
+        var search =$(this).find(":selected").val();
+        if(search != '' || search != undefined) {
+            load_data($(this).find(":selected").val());
+        }
+    });
+});
+</script>
+{% endblock %}

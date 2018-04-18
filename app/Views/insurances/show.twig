@@ -1,0 +1,99 @@
+{% extends 'layouts/main.twig' %}
+{% block content %}
+<main class="ills">
+	{% include 'partials/upper_tabs.twig' %}
+	<div class="container ills-nav">
+		<div class="row">
+			<ul class="mr-auto">
+				<li>{{ insurance.title }}</li>
+			</ul>
+			<ul class="ml-auto">
+				<li>Sığorta</li>
+				<li> 
+					>
+				</li>
+				<li>Paşa Sığorta</li>
+			</ul>
+		</div>
+	</div>
+	<div class="container ills-large-descript">
+		<div class="row">
+			{{ insurance.description }}
+		</div>
+	</div>
+	<div class="insurances">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-2"></div>
+				<div class="col-md-8">
+					<div class="row">
+						<div class="col-md-4 standart">
+							<div>
+								<div class="insurance-mode">
+									Standart
+								</div>
+								<div class="insurance-price">
+									30
+								</div>
+								<div class="insurance-desc-small">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vehicula imperdiet tortor, sed lobortis erat dignissim in.</div>
+								<div class="insurance-button">
+									<ul>
+										<a href="{{ path_for('insurances.show', {type: 'standart'} ) }}">
+											<li>Ətraflı</li>
+										</a>
+										<a href="{{ path_for('insurances.payment') }}">
+											<li>İndi al</li>
+										</a>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4 gold">
+							<div>
+								<div class="insurance-mode">
+									Gold
+								</div>
+								<div class="insurance-price">
+									100
+								</div>
+								<div class="insurance-desc-small">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vehicula imperdiet tortor, sed lobortis erat dignissim in.</div>
+								<div class="insurance-button">
+									<ul>
+										<a href="{{ path_for('insurances.show', {type: 'gold'} ) }}">
+											<li>Ətraflı</li>
+										</a>
+										<a href="{{ path_for('insurances.payment') }}">
+											<li>İndi al</li>
+										</a>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4 platinum">
+							<div>
+								<div class="insurance-mode">
+									Platinum
+								</div>
+								<div class="insurance-price">
+									150
+								</div>
+								<div class="insurance-desc-small">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vehicula imperdiet tortor, sed lobortis erat dignissim in.</div>
+								<div class="insurance-button">
+									<ul>
+										<a href="{{ path_for('insurances.show', {type: 'platinum'} ) }}">
+											<li>Ətraflı</li>
+										</a>
+										<a href="{{ path_for('insurances.payment') }}">
+											<li>İndi al</li>
+										</a>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>
+{% endblock %}

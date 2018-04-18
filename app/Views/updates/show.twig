@@ -1,0 +1,114 @@
+{% extends 'layouts/main.twig' %} 
+{% block content %}
+<main class="news">
+	<div class="container-fluid">
+		<div class="shadow">
+		</div>
+	</div>
+	<div class="container ills-name-large">
+		{{ update.title }}
+	</div>
+	<div class="container ills-nav">
+		<div class="row">
+			<ul class="mr-auto">
+				<li>{{ update.title }}</li>
+			</ul>
+			<ul class="ml-auto">
+				<li><a href="{{ base_url() }}">Əsas səhifə</a></li>
+				<li>></li>
+				<li>
+					<a href="{{ path_for('updates.all') }}">
+					Xəbərlər
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="container ills-large-descript">
+		<div class="row">
+			<p>{{ update.content |raw }}</p>
+		</div>
+	</div>
+	<div class="container news-add">
+		<div class="row">
+			<div class="col-md-6">
+				<div>
+					<div class="news-add-image" style="background: url('{{ base_url() }}/uploads/updates/{{ update.image }}');"></div>
+				</div>
+			</div>
+			<div class="col-md-6">
+			    <div class="news-add-header">
+				    <span>Xəbər haqqında</span>
+				</div>
+				<p>Müəllif: {{update.author.fullname()}}</p>
+				<p>Tarix: {{update.created_at}}</p>
+				<p>Oxunma sayı: {{update.view_count}}</p>
+			</div>
+		</div>
+	</div>
+	<div class="share container-fluid">
+		<div class="row">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-3">
+						<p>Xəbəri paylaş</p>
+						<ul>
+							<a href="#">
+								<li>
+									<i class="fa fa-facebook" aria-hidden="true"></i>
+								</li>
+								<li class="share-active">
+									<i class="fa fa-twitter" aria-hidden="true"></i>
+								</li>
+							</a>
+						</ul>
+					</div>
+					<div class="col-md-9">
+						<p>Digər xəbərlər</p>
+						<div class="container-fluid">
+							<div class="row">
+								<div class="col-md-6">
+									<div class="row">
+										<div class="ills-image"></div>
+										<div class="ills-two-part">
+											<div class="ills-name">
+												Lorem Ipsum
+											</div>
+											<div class="ills-desc">
+												Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris commodo pretium enim, sed varius purus dictum in. In porta ipsum vel eleifend eleifend. Vestibulum enim est, hendrerit eu vehicula ut, tincidunt et velit. Mauris vitae varius nisi. Mauris aliquam ultricies velit a ullamcorper.
+											</div>
+											<a href="#">
+												<div class="more">
+													Daha ətraflı
+												</div>
+											</a>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="row">
+										<div class="ills-image"></div>
+										<div class="ills-two-part">
+											<div class="ills-name">
+												Lorem Ipsum
+											</div>
+											<div class="ills-desc">
+												Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris commodo pretium enim, sed varius purus dictum in. In porta ipsum vel eleifend eleifend. Vestibulum enim est, hendrerit eu vehicula ut, tincidunt et velit. Mauris vitae varius nisi. Mauris aliquam ultricies velit a ullamcorper.
+											</div>
+											<a href="#">
+												<div class="more">
+													Daha ətraflı
+												</div>
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>
+{% endblock %}

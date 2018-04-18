@@ -1,0 +1,34 @@
+<div class="container categories">
+    <div class="row">
+        <div class="col-md-12">
+            <a href="{{ path_for('histories.all') }}" class="history {% if tab_id == 'histories' %}active-category{% endif %}">
+                <div>
+                    <img class="myhistory" src="{{ base_url() }}/{{ assets }}/img/icons/history.png">
+                    {% if auth.user.role == 'doctor' %}
+                    <span>Tarixçə</span>
+                    {% elseif auth.user.role == 'user' or auth.user.role == 'admin' %}
+                    <span>Mənim tarixçəm</span>
+                    {% endif %}
+                </div>
+            </a>
+            <a href="{{ path_for('results.all') }}" class="result {% if tab_id == 'results' %}active-category{% endif %}">
+                <div>
+                    <img src="{{ base_url() }}/{{ assets }}/img/icons/microscope.png">
+                    <span>Analiz nəticələri</span>
+                </div>
+            </a>
+            <a href="{{ path_for('insurances.all') }}" class="insurance {% if tab_id == 'insurances' %}active-category{% endif %}">
+                <div>
+                    <img src="{{ base_url() }}/{{ assets }}/img/icons/insurance.png">
+                    <span>Sığorta</span>
+                </div>
+            </a>
+            <a href="{{ path_for('appointments.all') }}" class="appointment {% if tab_id == 'appointments' %}active-category{% endif %}">
+                <div>
+                    <img src="{{ base_url() }}/{{ assets }}/img/icons/pin.png">
+                    <span>Təyinat</span>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>

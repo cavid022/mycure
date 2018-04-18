@@ -1,0 +1,245 @@
+{% extends 'layouts/main.twig' %}
+{% block content %}
+<main class="ills payment">
+	{% include 'partials/upper_tabs.twig' %}
+	<div class="payment-part">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3">
+				</div>
+				<div class="col-md-6">
+					<div class="payment-part-card">
+						<p>Ödəmə üsulu</p>
+						<div class="container tabs">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="tab">
+										<button class="tablinks" onclick="openCity(event, 'articles-tab')" id="defaultOpen">Master Card</button>
+										<button class="tablinks" onclick="openCity(event, 'news-tab')">Maestro Card</button>
+										<button class="tablinks" onclick="openCity(event, 'ills-tab')">VISA</button>
+									</div>
+								</div>
+								<div class="col-md-12">
+									<div id="articles-tab" class="tabcontent">
+										<form>
+											<div class="input-group input-group-icon">
+												<input type="text" placeholder="Kart nömrəsi"/>
+												<div class="input-icon"><i class="fa fa-credit-card"></i></div>
+											</div>
+											<div class="col-half">
+												<div class="input-group input-group-icon">
+													<input type="text" placeholder="CVV"/>
+													<div class="input-icon"><i class="fa fa-user"></i></div>
+												</div>
+											</div>
+											<div class="col-half">
+												<div class="input-group">
+													<select>
+														<option>01 Yanvar</option>
+														<option>02 Fevral</option>
+														<option>03 Mart</option>
+														<option>04 Aprel</option>
+														<option>05 May</option>
+														<option>06 Iyun</option>
+														<option>07 Iyul</option>
+														<option>08 Avqust</option>
+														<option>09 Sentyabr</option>
+														<option>10 Oktyabr</option>
+														<option>11 Noyabr</option>
+														<option>12 Dekabr</option>
+													</select>
+													<select>
+														<option>2017</option>
+														<option>2018</option>
+														<option>2019</option>
+														<option>2020</option>
+														<option>2021</option>
+														<option>2022</option>
+														<option>2023</option>
+														<option>2024</option>
+														<option>2025</option>
+														<option>2026</option>
+													</select>
+												</div>
+											</div>
+										</form>
+										<div class="information">
+											<p>Ödəmə üsulu</p>
+											<form>
+												<table>
+													<tr>
+														<td> 
+															<input type="checkbox" name="" id="card-information">
+														</td>
+														<td>
+															Yes I accept the terms and conditions of signing up to this service and have read the privacy policy regarding the storing my information.
+														</td>
+													</tr>
+												</table>
+												<div>
+													<input type="submit" name="" value="Ödə">
+												</div>
+											</form>
+										</div>
+									</div>
+									<div id="news-tab" class="tabcontent">
+										<form>
+											<div class="input-group input-group-icon">
+												<input type="text" placeholder="Kart nömrəsi"/>
+												<div class="input-icon"><i class="fa fa-credit-card"></i></div>
+											</div>
+											<div class="col-half">
+												<div class="input-group input-group-icon">
+													<input type="text" placeholder="CVV"/>
+													<div class="input-icon"><i class="fa fa-user"></i></div>
+												</div>
+											</div>
+											<div class="col-half">
+												<div class="input-group">
+													<select>
+														<option>01 Yanvar</option>
+														<option>02 Fevral</option>
+														<option>03 Mart</option>
+														<option>04 Aprel</option>
+														<option>05 May</option>
+														<option>06 Iyun</option>
+														<option>07 Iyul</option>
+														<option>08 Avqust</option>
+														<option>09 Sentyabr</option>
+														<option>10 Oktyabr</option>
+														<option>11 Noyabr</option>
+														<option>12 Dekabr</option>
+													</select>
+													<select>
+														<option>2017</option>
+														<option>2018</option>
+														<option>2019</option>
+														<option>2020</option>
+														<option>2021</option>
+														<option>2022</option>
+														<option>2023</option>
+														<option>2024</option>
+														<option>2025</option>
+														<option>2026</option>
+													</select>
+												</div>
+											</div>
+										</form>
+										<div class="information">
+											<p>Ödəmə üsulu</p>
+											<form>
+												<table>
+													<tr>
+														<td> 
+															<input type="checkbox" name="" id="card-information">
+														</td>
+														<td>
+															Yes I accept the terms and conditions of signing up to this service and have read the privacy policy regarding the storing my information.
+														</td>
+													</tr>
+												</table>
+												<div>
+													<input type="submit" name="" value="Ödə">
+												</div>
+											</form>
+										</div>
+									</div>
+									<div id="ills-tab" class="tabcontent">
+										<form>
+											<div class="input-group input-group-icon">
+												<input type="text" placeholder="Kart nömrəsi"/>
+												<div class="input-icon"><i class="fa fa-credit-card"></i></div>
+											</div>
+											<div class="col-half">
+												<div class="input-group input-group-icon">
+													<input type="text" placeholder="CVV"/>
+													<div class="input-icon"><i class="fa fa-user"></i></div>
+												</div>
+											</div>
+											<div class="col-half">
+												<div class="input-group">
+													<select>
+														<option>01 Yanvar</option>
+														<option>02 Fevral</option>
+														<option>03 Mart</option>
+														<option>04 Aprel</option>
+														<option>05 May</option>
+														<option>06 Iyun</option>
+														<option>07 Iyul</option>
+														<option>08 Avqust</option>
+														<option>09 Sentyabr</option>
+														<option>10 Oktyabr</option>
+														<option>11 Noyabr</option>
+														<option>12 Dekabr</option>
+													</select>
+													<select>
+														<option>2017</option>
+														<option>2018</option>
+														<option>2019</option>
+														<option>2020</option>
+														<option>2021</option>
+														<option>2022</option>
+														<option>2023</option>
+														<option>2024</option>
+														<option>2025</option>
+														<option>2026</option>
+													</select>
+												</div>
+											</div>
+										</form>
+										<div class="information">
+											<p>Ödəmə üsulu</p>
+											<form>
+												<table>
+													<tr>
+														<td> 
+															<input type="checkbox" name="" id="card-information">
+														</td>
+														<td>
+															Yes I accept the terms and conditions of signing up to this service and have read the privacy policy regarding the storing my information.
+														</td>
+													</tr>
+												</table>
+												<div>
+													<input type="submit" name="" value="Ödə">
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>
+{% endblock %}
+{% block footer_scripts %} 
+<script type="text/javascript">
+	$( document ).ready(function() {
+	   $( ".nav-item .btn" ).click(function() {
+	      $(".search-input").slideToggle(1000);
+	    });
+	});
+</script>
+<script>
+	function openCity(evt, cityName) {
+	    var i, tabcontent, tablinks;
+	    tabcontent = document.getElementsByClassName("tabcontent");
+	    for (i = 0; i < tabcontent.length; i++) {
+	        tabcontent[i].style.display = "none";
+	    }
+	    tablinks = document.getElementsByClassName("tablinks");
+	    for (i = 0; i < tablinks.length; i++) {
+	        tablinks[i].className = tablinks[i].className.replace(" active", "");
+	    }
+	    document.getElementById(cityName).style.display = "block";
+	    evt.currentTarget.className += " active";
+	}
+	
+	// Get the element with id="defaultOpen" and click on it
+	document.getElementById("defaultOpen").click();
+</script>
+{% endblock %}

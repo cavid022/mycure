@@ -1,0 +1,45 @@
+{% extends 'layouts/main.twig' %} 
+{% block content %}
+<main class="main-part">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-7"></div>
+			<div class="col-md-5 asd">
+				<div class="register-panel register-panel-end">
+					<!-- Form login -->
+					<div class="color row">
+						<div class="col"></div>
+						<div class="col"></div>
+						<div class="col"></div>
+						<div class="col"></div>
+						<div class="col"></div>
+						<div class="col"></div>
+						<div class="col"></div>
+					</div>
+					<form action="{{ path_for('doctor.auth.signup.step_three.post') }}" method="post">
+						<div class="md-form">
+							<input type="text" id="defaultForm-job" name="specialty" class="form-control">
+							<label for="defaultForm-job">İxtisas</label>
+						</div>
+						<div class="md-form">
+							<textarea type="text" id="defaultForm-edu" name="education" class="form-control"></textarea>
+							<label for="defaultForm-edu">Təhsil</label>
+						</div>
+						<div class="md-form">
+							<textarea type="text" id="defaultForm-edu" name="experience" class="form-control"></textarea>
+							<label for="defaultForm-edu">Təcrübə</label>
+						</div>
+						<div class="md-form">
+							<textarea type="text" id="defaultForm-edu" name="scientific_articles" class="form-control"></textarea>
+							<label for="defaultForm-edu">Elmi məqalə</label>
+						</div>
+						<div class="text-center">
+							<button href="#" id="next-registration">Son</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends 'layouts/main.twig' %}
+{% block head_scripts %}
+{% endblock %}
+{% block content %}
+<main class="main-part">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-7"></div>
+			<div class="col-md-5 asd">
+				<div class="registration-panel">
+					<div class="color row">
+						<div class="col"></div>
+						<div class="col"></div>
+						<div class="col"></div>
+						<div class="col"></div>
+						<div class="col"></div>
+						<div class="col"></div>
+						<div class="col"></div>
+					</div>
+					<!-- Form login -->
+					<form action="{{ path_for('auth.signup.step_one') }}" method="post">
+						<div class="md-form">
+							<input type="text" id="defaultForm-name" name="first_name" value="{{ old.first_name }}" class="form-control">
+							<label for="defaultForm-name">Ad</label>
+							{% if errors.first_name %} <span class="help-block">{{ errors.first_name | first }}</span> {% endif %}
+						</div>
+						<div class="md-form">
+							<input type="text" id="defaultForm-surname" name="last_name" value="{{ old.last_name }}" class="form-control">
+							<label for="defaultForm-surname">Soyad</label>
+							{% if errors.last_name %} <span class="help-block">{{ errors.last_name | first }}</span> {% endif %}
+						</div>
+						<div class="md-form">
+							<input type="email" id="defaultForm-email" name="email" value="{{ old.email }}" class="form-control">
+							<label for="defaultForm-email">Email</label>
+							{% if errors.email %} <span class="help-block">{{ errors.email | first }}</span> {% endif %}
+						</div>
+						<div class="md-form">
+							<input type="password" id="defaultForm-pass" name="password" class="form-control">
+							<label for="defaultForm-pass">Şifrə</label>
+							{% if errors.password %} <span class="help-block">{{ errors.password | first }}</span> {% endif %}
+						</div>
+						<div class="md-form">
+							<input type="password" id="same-pass" name="confirm_password" class="form-control">
+							<label for="same-pass">Təkrar şifrə</label>
+							{% if errors.confirm_password %} <span class="help-block">{{ errors.confirm_password | first }}</span> {% endif %}
+						</div>
+						<div class="text-center">
+							<a href="{{ path_for('doctor.auth.signup.step_one') }}" id="asdoctor">
+							Həkim kimi
+							</a>
+							<button type="submit" id="next-registration">
+							Növbəti
+							</button>
+						</div>
+						<div class="ready-account">
+							<span>Hesabınız var?</span>
+							<a href="{{ path_for('auth.login') }}">Daxil olun</a>
+						</div>
+					</form>
+					<!-- Form login -->
+				</div>
+			</div>
+		</div>
+	</div>
+</main>
+{#{% if errors.password %} <span class="help-block">{{ errors.password | first }}</span> {% endif %}#}
+{% endblock %}

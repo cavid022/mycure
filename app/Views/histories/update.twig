@@ -1,0 +1,85 @@
+{% extends 'layouts/main.twig' %}
+{% block content %}
+<main class="ills payment">
+    {% include 'partials/upper_tabs.twig' %}
+    <div class="payment-part appointment-part">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                </div>
+                <div class="col-md-6">
+                    <div class="payment-part-card appointment-part-card">
+                        <p>Tarixçə məlumatları</p>
+                        <form action="{{ path_for('histories.update.post', {id: history.id} ) }}" method="post">
+                            <select name="illness_id">
+                                <option value="{{ history.illness_id }}" selected>{{ history.illness.title }}</option>
+                                <option value="" disabled>---</option>
+                                {% for illness in illnesses %}
+                                <option value="{{ illness.id }}">{{ illness.title }}</option>
+                                {% endfor %}
+                            </select>
+                            <select name="doctor_id">
+                                <option value="{{ history.doctor_id}}"  selected>{{ history.doctor.fullname() }}</option>
+                                <option value="" disabled>---</option>
+                                {% for doctor in doctors %}
+                                <option value="{{ doctor.id }}">{{ doctor.fullname() }}</option>
+                                {% endfor %}
+                            </select>
+                            <p>Başlama tarixi</p>
+                            <select name="start_day">
+                                <option value="{{ history.start_date|date("d", false)  }}" selected>{{ history.start_date|date("d", false)  }}</option>
+                                <option value="" disabled>---</option>
+                                {% for i in 1..31 %}
+                                <option value="{{ i }}">{{ i }}</option>
+                                {% endfor %}
+                            </select>
+                            <select name="start_month">
+                                <option value="{{ history.start_date|date("m", false)  }}" selected>{{ history.start_date|date("m", false)|month  }}</option>
+                                <option value="" disabled>---</option>
+                                {% for i in 1..12 %}
+                                <option value="{{ i }}">{{ i |month}}</option>
+                                {% endfor %}
+                            </select>
+                            <select name="start_year">
+                                <option value="{{ history.start_date|date("Y", false)  }}" selected>{{ history.start_date|date("Y", false)  }}</option>
+                                <option value="" disabled>---</option>
+                                {% for i in 1990..2017 %}
+                                <option value="{{ i }}">{{ i }}</option>
+                                {% endfor %}
+                            </select>
+                            <p>Bitmə tarixi</p>
+                            <select name="end_day">
+                                <option value="{{ history.end_date|date("d", false)  }}" selected>{{ history.end_date|date("d", false)  }}</option>
+                                <option value="" disabled>---</option>
+                                {% for i in 1..31 %}
+                                <option value="{{ i }}">{{ i }}</option>
+                                {% endfor %}
+                            </select>
+                            <select name="end_month">
+                                <option value="{{ history.end_date|date("m", false)  }}" selected>{{ history.end_date|date("m", false)|month  }}</option>
+                                <option value="" disabled>---</option>
+                                {% for i in 1..12 %}
+                                <option value="{{ i }}">{{ i |month}}</option>
+                                {% endfor %}
+                            </select>
+                            <select name="end_year">
+                                <option value="{{ history.end_date|date("Y", false)  }}" selected>{{ history.end_date|date("Y", false)  }}</option>
+                                <option value="" disabled>---</option>
+                                {% for i in 1990..2017 %}
+                                <option value="{{ i }}">{{ i }}</option>
+                                {% endfor %}
+                            </select>
+                            <textarea placeholder="Simptomlar" name="simptoms">{{ history.simptoms }}</textarea>
+                            <textarea placeholder="Detallar"  name="details">{{ history.details }}</textarea>
+                            <div>
+                                <button type="submit">Yadda saxla</button>
+                            </div>
+                        </form>
+                    </div>      
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+        </div>
+    </div>      
+</main>
+{% endblock %}

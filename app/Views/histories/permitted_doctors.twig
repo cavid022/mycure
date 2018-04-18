@@ -1,0 +1,73 @@
+{% extends 'layouts/main.twig' %}
+{% block content %}
+<main class="ills">
+	{% include 'partials/upper_tabs.twig' %}
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+			<div class="form-group">
+			    <div class="input-group">
+			     <span class="input-group-addon">Axtar</span>
+			     <input type="text" name="search_text" id="search_text" placeholder="İcazə vermək üçün həkimin adını daxil edin." class="form-control" />
+			    </div>
+			   </div>
+			</div>
+			<div class="col-md-12">
+			   <div id="result"></div>
+		   </div>
+	    </div>
+	    <br>
+		<div class="row">
+			<div class="col-md-12">
+				<table class="table table-striped">
+					<tr>
+						<th>Həkimin adı</th>
+						<th>Həkimin soyadı</th>
+						<th>İxtisas</th>
+						<th>Klinika</th>
+						<th>Şöbə</th>
+					</tr>
+					{% for doctor in permitted_doctors %}
+					<tr>
+						<td>{{ doctor.first_name }}</td>
+						<td>{{ doctor.last_name }}</td>
+						<td>{{ doctor.doctor.specialty }}</td>
+						<td>{{ doctor.department.hospital.name }}</td>
+						<td>{{ doctor.department.name }}</td>
+				</tr>
+					{% endfor %}
+				</table>
+			</div>
+		</div>
+	</div>
+</main>
+{% endblock %}
+{% block footer_scripts %}
+<script>
+	$(document).ready(function() {
+		load_data();
+	
+	function load_data(query) {
+		$.ajax({
+			url:"{{ path_for('histories.doctorsAvailableForPermission') }}",
+			method:"POST",
+			data:{
+				query:query
+			},
+			success:function(data) {
+				$('#result').html(data);
+			}
+		});
+	}
+	$('#search_text').keyup(function(){
+		var search = $(this).val();
+		if(search != '') {
+			load_data(search);
+		}
+		else {
+			load_data();
+		}
+	});
+});
+</script>
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends 'layouts/main.twig' %} 
+{% block content %}
+    <div class="col-md-2">
+    <div class="md-form ">
+        <form class="input-group">
+            <input type="text" class="form-control" name="get_users_for_conversation" id="get_users_for_conversation" placeholder="Mesaj yaz">
+            <a href="#">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </a>
+        </form>
+    </div>
+    <ul class="list" id="result"></ul>
+</div>
+<div class="col-md-6">
+    <div class="caption">
+        Gələn mesajlar
+    </div>
+    <div class="container-fluid msg_profile">
+        {% for conversation in conversations %}
+        {% if conversation.lastMessageDate()|trim is not empty %}
+
+        <a href="{{ path_for('conversations.show', {'id': conversation.id}) }}">
+            <div class="row">
+                <div class="image">
+                   <div></div>
+                </div>
+                <div class="message_self">
+                    <b>{{ conversation.heading() }}</b> | {{ conversation.lastMessage() }}
+                </div>
+                <div class="message_date">
+                    {{conversation.lastMessageDate()}}
+                </div>
+            </div> 
+        </a>
+        {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+{% block footer_scripts %} 
+    <script>
+    $(document).ready(function() {
+        load_data();
+        function load_data(query) {
+            $.ajax({
+                url:"{{path_for('ajax.conversations.users_list')}}",
+                method:"POST",
+                data:{query:query},
+                success:function(data) {
+                    $('#result').html(data);
+                }
+            });
+        }
+        $('#get_users_for_conversation').keyup(function() {
+            var search = $(this).val();
+            if(search != '') {
+                load_data(search);
+            } else {
+                load_data();
+            }
+        });
+    });
+    </script>
+{% endblock %} 

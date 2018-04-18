@@ -1,0 +1,84 @@
+{% extends 'layouts/main.twig' %}
+{% block content %}
+<main class="ills">
+	{% include 'partials/upper_tabs.twig' %}
+	<div class="container histories">
+		<div class="row">
+			
+			{% if auth.user.role == "user" or auth.user.role == 'admin' %}
+			<div class="col-md-12">
+				<a href="{{ path_for('histories.permitted_doctors') }}">Tarixçə paylaşılan həkimlər</a>
+			</div>
+			{% if histories | length > 0 %}
+			{% for history in histories %}
+			<div class="col-md-6">
+				<div class="history-part">
+					<table>
+						<tr>
+							<td>Xəstəlik</td>
+							<td>{{ history.illness.title }}</td>
+						</tr>
+						<tr>
+							<td>Həkim</td>
+							<td>{{ history.doctor.fullname() }}</td>
+						</tr>
+						<tr>
+							<td>Başlanğıc tarixi</td>
+							<td>{{ history.start_date }}</td>
+						</tr>
+						<tr>
+							<td>Bitmə tarixi</td>
+							<td>{{ history.end_date }}</td>
+						</tr>
+						<tr>
+							<td>Simptomlar</td>
+							<td>{{ history.simptoms }}</td>
+						</tr>
+						<tr>
+							<td>Detallar</td>
+							<td>{{ history.details }}</td>
+						</tr>
+					</table>
+					<div class="history-down-part">
+						<a href="{{ path_for('histories.delete.post', {id: history.id} ) }}">Sil</a>
+						<a href="{{ path_for('histories.update', {id: history.id} ) }}">Düzəliş et</a>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+			{% else %}
+			<div class="none">
+				<span>Sizin qeydə alınmış bir tarixçəniz yoxdur.</span>
+			</div>
+			{% endif %}
+			<div class="col-md-12">
+				<a href="{{ path_for('histories.add') }}">Əlavə et</a>
+			</div>
+			
+			
+			{% elseif auth.user.role == "doctor" %}
+			
+			
+				<div class="col-md-12">
+					<table class="table table-striped">
+						<tr>
+							<th>Pasientin adı</th>
+							<th>Pasientin soyadı</th>
+							<th>Əməliyyatlar</th>
+						</tr>
+						{% for user in accessible_users %}
+						<tr>
+							<td>{{ user.first_name }}</td>
+							<td>{{ user.last_name }}</td>
+							<td><a href="{{ path_for('histories.user_histories', {id: user.id} ) }}">Tarixçəyə bax</a></td>
+						</tr>
+						{% endfor %}
+					</table>
+				</div>
+				
+			{% endif %}
+			
+		</div>
+	</div>
+</main>
+{% endblock %}

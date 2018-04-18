@@ -1,0 +1,51 @@
+{% extends 'layouts/main.twig' %}
+{% block content %}
+<main class="ills">
+	{% include 'partials/upper_tabs.twig' %}
+	<section>
+		Xəbərlər
+	</section>
+	<div class="line"></div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="container ills-sort">
+					<div class="row">
+						{% for update in updates %}
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<div class="row">
+								<div class="ills-image" style="background: url('{{ base_url() }}/uploads/updates/{{ update.image }}');"></div>
+								<div class="ills-two-part">
+									<div class="ills-name">
+										<a href="{{path_for('updates.show', {id: update.id})}}">
+										{{ update.title }}
+										</a>
+									</div>
+									<div class="ills-desc">
+										{{ update.content |show_more|raw }}
+									</div>
+									<a href="{{path_for('updates.show', {id: update.id})}}">
+										<div class="more">
+											Daha ətraflı
+										</div>
+									</a>
+								</div>
+							</div>
+						</div>
+						{% endfor %}
+					</div>
+				</div>
+				<div class="container">
+					<div class="row">
+						<a class="more-button" href="#">
+							<div>Daha çox</div>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>
+{% endblock %} 
+{% block footer_scripts %} 
+{% endblock %}

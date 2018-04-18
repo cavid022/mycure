@@ -1,0 +1,7 @@
+{% if doctors is empty %}
+    <div>No doctors found</div>
+{% else %}
+    {% for doctor in doctors %}
+       {{ doctor.fullname() }}<br>
+    {% endfor %}
+{% endif %}

@@ -1,0 +1,46 @@
+<!-- JQuery -->
+<script type="text/javascript" src="{{base_url()}}/assets/js/jquery-3.1.1.min.js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="{{base_url()}}/assets/js/tether.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="{{base_url()}}/assets/js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="{{base_url()}}/assets/js/mdb.min.js"></script>
+<!-- JavaScript Includes -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="{{base_url()}}/assets/js/jquery.knob.js"></script>
+<script type="text/javascript">
+    $( document ).ready(function() {
+        $( ".registration" ).click(function() {
+           $(".login").css("display","none");
+           $(".registrate").fadeIn(); 
+        });
+        $( ".next" ).click(function() {
+            // $('form.registrate').find('input').each(function(){
+            //         if($(this).prop('required') == 'undefined'){
+            //             console.log("NR");
+            //         } else {
+            //             console.log("fuck");
+            //         }
+            //     });
+           $(".registrate").css("display","none");
+    $(".next-registrate").fadeIn(); 
+        });
+    });
+</script>
+<script src="https://js.pusher.com/4.1/pusher.min.js"></script>
+<script>
+
+// Enable pusher logging - don't include this in production
+Pusher.logToConsole = true;
+
+var pusher = new Pusher('31cd2feb6361964fd937', {
+  cluster: 'ap2',
+  encrypted: true
+});
+
+var channel = pusher.subscribe('my-channel');
+channel.bind('my-event', function(data) {
+  alert(data);
+});
+</script>

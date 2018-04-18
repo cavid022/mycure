@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<title>{{ title }}</title>
+		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css"  rel="stylesheet">
+		<link href="{{base_url()}}/assets/css/bootstrap.min.css" rel="stylesheet">
+		<link href="{{base_url()}}/assets/css/mdb.min.css" rel="stylesheet">
+		<link href="{{base_url()}}/assets/css/jquery-ui.min.css" rel="stylesheet" type="text/css">
+		<link href="{{base_url()}}/assets/css/style.css" rel="stylesheet">
+		<link href="{{base_url()}}/assets/css/iziToast.min.css" rel="stylesheet">
+		<link href="{{base_url()}}/assets/img/favicon.ico" rel="shortcut icon"  type="image/x-icon">
+		<link href="{{base_url()}}/assets/img/favicon.ico" rel="icon" type="image/x-icon">
+		<script src="https://js.pusher.com/4.1/pusher.min.js"></script>
+		<script>
+			// Enable pusher logging - don't include this in production
+			Pusher.logToConsole = true;
+			
+			var pusher = new Pusher('31cd2feb6361964fd937', {
+			  cluster: 'ap2',
+			  encrypted: true
+			});
+			
+			var channel = pusher.subscribe('{{ auth.user.id |json_encode }}@notification');
+			channel.bind('new_notification', function(data) {
+				const notification = {
+				    id: data.message.id,
+				    fullname: data.message.first_name + " " + data.message.last_name,
+				    title: data.message.title,
+				    created_at: data.message.created_at
+				}
+				const notificationMarkup = `
+				<a class="dropdown-item unread" href="/mycure/public/notifications/${notification.id}">
+	                <div>
+	                	${notification.fullname}
+	                	<span>${notification.title}</span>
+	                </div>
+	                <span>${notification.created_at}</span>
+	            </a> `;
+				$('#notifications').prepend(notificationMarkup);
+				iziToast.show({
+				    title: `${notification.fullname}`,
+				    message: `${notification.title}`,
+				    buttons: [
+				        ['<button>Ok</button>', function (instance, toast) {
+				            window.location.href = `/mycure/public/notifications/${notification.id}`;
+				        }, true], // true to focus
+				        ['<button>Close</button>', function (instance, toast) {
+				            instance.hide({
+				                transitionOut: 'fadeOutUp',
+				                onClosing: function(instance, toast, closedBy){
+				                    console.info('closedBy: ' + closedBy); // The return will be: 'closedBy: buttonName'
+				                }
+				            }, toast, 'buttonName');
+				        }]
+					]
+				});
+				document.title = document.title + " - New Notification";
+			});
+		</script>
+	</head>
+	<body>
+		<div class="general">
+			{% if auth.check or doctor.auth %}
+			<div class="container-fluid top-menu">
+				<div class="row">
+					<div class="container">
+						<div class="row">
+							<ul class="ml-auto">
+								<li><img src="{{ base_url() }}/{{ assets }}/img/profile.png"></li>
+								<li><a href="#">{{ auth.user.fullname() }}{{ doctor.user.fullname() }}</a></li>
+								<li class="messages">
+									<a href="#" class="messages-button dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+									<i class="fa fa-envelope" aria-hidden="true"></i>
+									</a>
+									<div class="dropdown-menu">
+										<a class="dropdown-item" href="#">
+											<div>
+												<span>Hippokrat</span>
+												<span>:</span>
+												<span>And içmisən? And içmisən? And içmisən?</span>
+											</div>
+											<span>1 gün əvvəl</span>
+										</a>
+										<a class="dropdown-item" href="#">
+											<div>
+												<span>Hippokrat</span>
+												<span>:</span>
+												<span>And içmisən? And içmisən? And içmisən?</span>
+											</div>
+											<span>10 gün əvvəl</span>
+										</a>
+										<a class="dropdown-item" href="{{ path_for('conversations.all') }}">See all messages</a>
+									</div>
+								</li>
+								<li class="notifications">
+									<a href="#" class="notifications-button dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+										<i class="fa fa-bell" aria-hidden="true"></i>
+									</a>
+									<div class="dropdown-menu" id="notifications" x-placement="bottom-start" style="position: absolute; transform: translate3d(1174px, 38px, 0px); top: 0px; left: 0px; will-change: transform;">
+									{% for notification in auth.user.notifications %}
+	                                    <a class="dropdown-item{% if notification.is_read == 0 %} unread{% endif %}"  href="{{ path_for('notifications.show', {id: notification.id} ) }}">
+	                                        <div>
+	                                        	{{ notification.fullname() }}
+	                                        	<span>{{ notification.title }} </span>
+	                                        </div>
+	                                        <span>{{ notification.created_at }}</span>
+	                                    </a>
+                                    {% else %}
+                                        <span>Yeni ismarıcınız yoxdur</span>
+                                	{% endfor %}
+									</div>
+								</li>
+								<li class="logout-part">
+									<a href="#" class="angle-down  dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+									<i class="fa fa-angle-down" aria-hidden="true"></i>
+									</a>
+									<div class="dropdown-menu">
+										<a class="dropdown-item" href="{{ path_for('auth.logout')}}">
+											<div>Çıxış</div>
+										</a>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			{% endif %}
+			<!--Main Navigation-->
+			<header class="navigation-bar">
+				<nav class="navbar navbar-expand-lg">
+					<div class="container">
+						<a class="navbar-brand" href="{{ path_for('home.dashboard') }}">
+						<img src="{{base_url()}}/assets/img/logo.png">
+						</a>
+						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon">
+						<i class="fa fa-bars" aria-hidden="true"></i>
+						</span>
+						</button>
+						<div class="collapse navbar-collapse" id="navbarSupportedContent">
+							<ul class="navbar-nav ml-auto">
+								<li class="nav-item {% if page_id == null %}active-nav{% endif %}">
+									<a class="nav-link" href="{{ path_for('home.dashboard') }}">Ana səhifə</a>
+								</li>
+								<li class="nav-item {% if page_id == 'illnesses' %}active-nav{% endif %}">
+									<a class="nav-link" href="{{ path_for('illnesses.all') }}">Xəstəliklər</a>
+								</li>
+								<li class="nav-item {% if page_id == 'updates' %}active-nav{% endif %}">
+									<a class="nav-link" href="{{ path_for('updates.all') }}">Xəbərlər</a>
+								</li>
+								<li class="nav-item {% if page_id == 'about' %}active-nav{% endif %}">
+									<a class="nav-link" href="{{ path_for('about.show') }}">Haqqımızda</a>
+								</li>
+								<li class="nav-item {% if page_id == 'contact' %}active-nav{% endif %}">
+									<a class="nav-link" href="{{ path_for('contact.show') }}">Əlaqə</a>
+								</li>
+								<li class="nav-item lang">
+									<select>
+										<option>AZ</option>
+										<option>RU</option>
+										<option>EN</option>
+									</select>
+								</li>
+								<li class="nav-item search-input">
+									<form>
+										<input type="search" name="">
+									</form>
+								</li>
+								<li class="nav-item search-button">
+									<button class="btn">
+									<i class="fa fa-search" aria-hidden="true"></i>
+									</button>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</nav>
+				<div class="view intro-2 hm-indigo-slight">
+					<div class="full-bg-img flex-center">
+						<div class="container">
+							<div class="white-text text-center wow fadeInUp">
+								<h2>This Navbar isn't fixed</h2>
+								<h5>When you scroll down it will disappear</h5>
+								<br>
+								<p>Full page intro with background image will be always displayed in full screen mode, regardless of device </p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</header>
+			<!--Main Navigation-->     
+		</div>
+		{% block content %}{% endblock %}
+		<footer>
+			<div class="container">
+				<div class="row">
+					<ul>
+						<li>
+							<img src="{{base_url()}}/assets/img/logo.png">
+						</li>
+					</ul>
+					<ul>
+						<li>
+							<a href="{{ path_for('home.dashboard') }}">Ana səhifə</a>
+						</li>
+						<li>
+							<a href="{{ path_for('illnesses.all') }}">Xəstəliklər</a>
+						</li>
+						<li>
+							<a href="{{ path_for('updates.all') }}">Xəbərlər</a> 
+						</li>
+						<li>
+							<a href="{{ path_for('about.show') }}">Haqqımızda</a>
+						</li>
+						<li>
+							<a href="{{ path_for('contact.show') }}">Əlaqə</a>
+						</li>
+					</ul>
+					<ul>
+						<li>
+							<a href="{{ path_for('doctor.auth.signup.step_one') }}">Həkimlər üçün</a>
+						</li>
+						<li>
+							<a href="{{ path_for('auth.login') }}">Üzvlər üçün</a>
+						</li>
+					</ul>
+					<ul>
+						<li>
+							<a href="#">Şikayətlər</a>
+						</li>
+						<li>
+							<a href="#">Təkliflər</a>
+						</li>
+					</ul>
+					<ul>
+						<li>
+							<a href="#">Azərbaycanca</a>
+						</li>
+						<li>
+							<a href="#">Русский</a> 
+						</li>
+						<li>
+							<a href="#">English</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</footer>
+		<script type="text/javascript" src="{{base_url()}}/assets/js/jquery-3.1.1.min.js"></script>
+		<script type="text/javascript" src="{{base_url()}}/assets/js/popper.min.js"></script>
+		<script type="text/javascript" src="{{base_url()}}/assets/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="{{base_url()}}/assets/js/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="{{base_url()}}/assets/js/mdb.min.js"></script>
+		<script src="{{base_url()}}/assets/js/jquery.maskedinput.js" type="text/javascript"></script>
+		<script type="text/javascript">
+			$( document ).ready(function() {
+			   $( ".nav-item .btn" ).click(function() {
+			      $(".search-input").slideToggle(1000);
+			    });
+			});
+		</script>
+		<script type="text/javascript" src="{{base_url()}}/assets/js/iziToast.js"></script>
+		
+		{% block footer_scripts %}{% endblock %} 
+	</body>
+</html>

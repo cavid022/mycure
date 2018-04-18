@@ -1,0 +1,78 @@
+{% extends 'layouts/main.twig' %}
+{% block content %}
+<main class="ills">
+        <div class="container-fluid">
+        </div>
+        <section>
+            Xəbərlər
+        </section>
+        <div class="line"></div>
+        <div class="article-one">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris commodo pretium enim, <br> sed varius purus dictum in.
+        </div>
+        <div class="container ills-sort">
+            <div class="row">
+                {% for update in updates %}
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="row">
+                        <div class="ills-image" style="background: url('{{ base_url() }}/uploads/updates/{{ update.image }}');"></div>
+                        <div class="ills-two-part">
+                            <div class="ills-name">
+                                <a href="{{path_for('updates.show', {id: update.id})}}">
+                                    {{ update.title }}
+                                </a>
+                            </div>
+                            <div class="ills-desc">
+                                {{ update.content |show_more|raw }}
+                            </div>
+                            <a href="{{path_for('updates.show', {id: update.id})}}">
+                                <div class="more">
+                                    Daha ətraflı
+                                </div>
+                            </a>
+                        </div>  
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="more-button"><a href="#">Daha çox</a></div>
+            </div>
+        </div>
+    </main> 
+
+{#<main>#}
+{#    <h1>Xəbərlər</h1>#}
+{#    <div class="container big-news">#}
+{#        <div class="row">#}
+{#               {% for post in posts %}#}
+{#            <div class="col-md-12">#}
+{#                <div class="news-panel">#}
+{#                    <div class="news-image" style="background: url('{{base_url()}}/assets/img/about_image/kenan.jpg');"></div>#}
+{#                    <div class="news-title">#}
+{#                        {{ post.title }}#}
+{#                    </div>#}
+{#                    <div class="news-desc">#}
+{#                       {{ post.content }}#}
+{#                       </div>#}
+{#                    <div class="news-view">#}
+{#                        <i class="fa fa-eye" aria-hidden="true"></i>#}
+{#                        <span>{{ post.view_count }}</span>#}
+{#                    </div>#}
+                    
+{#                    <div class="news-more">#}
+{#                        <form action='{{ path_for('news_inner.show', {id: post.id} ) }} '>#}
+{#                            <input type="submit"  name="" value="Ətraflı">#}
+{#                        </form>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#                   {% endfor %}#}
+                  
+        
+{#        </div>#}
+{#    </div>      #}
+{#</main>#}
+{% endblock %}

@@ -1,0 +1,22 @@
+{
+	"name": "bearlikelion/twig-recaptcha",
+	"type": "library",
+	"description": "A Twig extension to provide reCAPTCHA functionality.",
+	"keywords": ["twig", "extension", "recaptcha", "captcha"],
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Mark Arneman",
+			"homepage": "http://arneman.me"
+		}
+	],
+	"require": {
+		"php": ">=5.3.0",
+		"twig/twig": "*",
+		"recaptcha/php5": "v1.1.0"
+	},
+	"autoload": {
+		"files": ["Extension.php"]
+	},
+	"version": "1.0.0"
+}

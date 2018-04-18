@@ -1,0 +1,54 @@
+{% extends 'layouts/main.twig' %}
+{% block content %}
+<main class="ills">
+    {% include 'partials/upper_tabs.twig' %}
+    <div class="results results-add">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <p>Laboratoriya nəticəsi daxil edin</p>
+                    <div class="line"></div>
+                </div>
+                <div class="col-md-12">
+                    <form method="post" action="{{ path_for('results.add.post') }}" enctype="multipart/form-data">
+                    <table>
+                        <tr>
+                            <td>
+                                <input type="text" placeholder="Analiz" name="title" class="result-table-data" style="margin-top: 81px">
+                            </td>
+                            <td>
+                                <select name="user_id" class="result-table-data" style="margin-top: 81px">
+                                    <option value="" disabled selected>Pasient</option>
+                                    {% for user in users %}
+                                    <option value="{{ user.id }}">{{ user.fullname() }}</option>
+                                    {% endfor %}
+                                </select>
+                            </td>
+                            <td>
+                                     <input type="file" name="result_file">
+                            </td>
+                        </tr>
+                        
+                    </table>
+                    
+
+                    <div class="add-result">
+                        <button type="submit">Yüklə</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>    
+    </div>
+</main>
+{% endblock %}
+{% block footer_scripts %}
+<script type="text/javascript">
+    $( document ).ready(function() {
+        $("#date").datepicker();
+        $("#date1").datepicker();
+        $("#date3").datepicker();
+        $("#date4").datepicker();
+    });
+</script>
+{% endblock %}

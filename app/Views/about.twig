@@ -1,0 +1,30 @@
+{% extends 'layouts/main.twig' %} 
+{% block content %}
+<main class="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul>
+                        <li><a href="{{ base_url() }}">Əsas səhifə</a></li>
+                        <li>></li>
+                        <li><a href="{{ path_for('about.show') }}">Haqqımızda</li>
+                    </ul>
+                </div>
+            </div>
+        </div>  
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="about-photo" style="background: url('{{base_url()}}/assets/img/layer-6.png');"></div>
+                </div>
+                <div class="col-md-6">
+                    <p>Haqqımızda</p>
+                    <div class="line"></div>
+                    <p>
+                        MyCure layihəsi sağlamlıq məlumatlarınızın təhlükəsiz onlayn xülasəsidir. Siz öz istəyinizlə kimin sizin tibbi tarixcənizə müdaxilə edəcəyinə qərar verə bilərsiz. Həkimlər, xəstəxanalar və digər səhiyyə təminatçıları ilə sağlamlıq məlumatınızı bölüşə bilərsiniz. Bununla siz öz vaxtınıza və sağlamliğınızın qeydinə qala biləcəksiniz.
+                    </p>
+                </div>
+            </div>
+        </div>    
+    </main>
+{% endblock %}

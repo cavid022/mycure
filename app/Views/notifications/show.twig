@@ -1,0 +1,52 @@
+{% extends 'layouts/main.twig' %}
+{% block content %}
+<main class="ills">
+  {% include 'partials/upper_tabs.twig' %}
+  <div class="notification_table">
+    <div class="container">
+      <div class="row">
+          {% if object_type == 'appointment' %}
+          <div class="col-md-12">
+              <table class="table table-striped">
+                <tr>
+                  <th>Ad, Soyad</th>
+                  <th>Email</th>
+                  <th>Təyinat Günü</th> 
+                  <th>Təyinat Saatı</th>
+                  <th>Yüklənmə tarixi</th>
+                  <th>Həkim</th>
+                </tr>
+                  <tr>
+                    <td>{{ requested_object.user.fullname() }}</td>
+                    <td>{{ requested_object.user.email }}</td>
+                    <td>{{ requested_object.date }}</td>
+                    <td>{{ requested_object.time }}</td>
+                    <td>{{ requested_object.created_at }}</td>
+                    <td>{{ requested_object.doctor.fullname() }}</td>
+                  </tr>
+              </table>
+          </div>
+          {% elseif object_type == 'result' %}
+          <div class="col-md-12">
+              <table class="table table-striped">
+                <tr>
+                  <th>Həkim</th>
+                  <th>Pasient</th>
+                  <th>Analizin adı</th> 
+                  <th>Yüklənmə tarixi</th>
+                </tr>
+                <tr>
+                  <td>{{ requested_object.doctor.fullname() }}</td>
+                  <td>{{ requested_object.user.fullname() }}</td>
+                  <td>{{ requested_object.title }}</td>
+                  <td>{{ requested_object.created_at }}</td>
+                </tr>
+              </table>
+          </div>
+          {% endif %}
+      </div>
+    </div>    
+  </div>
+</main>
+
+{% endblock %}

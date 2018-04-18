@@ -1,0 +1,79 @@
+{% extends 'layouts/main.twig' %}
+{% block content %}
+<main class="ills payment">
+    {% include 'partials/upper_tabs.twig' %}
+    <div class="payment-part appointment-part">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                </div>
+                <div class="col-md-6">
+                    <div class="payment-part-card appointment-part-card">
+                        <p>Tarixçə məlumatları</p>
+                        <form action="{{ path_for('histories.add.post') }}" method="post">
+                            <select name="illness_id">
+                                <option value="" disabled selected>Xəstəlik</option>
+                                {% for illness in illnesses %}
+                                <option value="{{ illness.id }}">{{ illness.title }}</option>
+                                {% endfor %}
+                            </select>
+                            <select name="doctor_id">
+                                <option value="" disabled selected>Həkim</option>
+                                {% for doctor in doctors %}
+                                <option value="{{ doctor.id }}">{{ doctor.fullname() }}</option>
+                                {% endfor %}
+                            </select>
+                            <p>Başlama tarixi</p>
+                            <select name="start_day">
+                                <option value="" disabled selected>Gün</option>
+                                {% for i in 1..31 %}
+                                <option value="{{ i }}">{{ i }}</option>
+                                {% endfor %}
+                            </select>
+                            <select name="start_month">
+                                <option value="" disabled selected>Ay</option>
+                                {% for i in 1..12 %}
+                                <option value="{{ i }}">{{ i |month }}</option>
+                                {% endfor %}
+                            </select>
+                            <select name="start_year">
+                                <option value="" disabled selected>İl</option>
+                                {% for i in 1990..2017 %}
+                                <option value="{{ i }}">{{ i }}</option>
+                                {% endfor %}
+                            </select>
+                            <p>Bitmə tarixi</p>
+                            <select name="end_day">
+                                <option value="" disabled selected>Gün</option>
+                                {% for i in 1..31 %}
+                                <option value="{{ i }}">{{ i }}</option>
+                                {% endfor %}
+                            </select>
+                            <select name="end_month">
+                                <option value="" disabled selected>Ay</option>
+                                {% for i in 1..12 %}
+                                <option value="{{ i }}">{{ i |month}}</option>
+                                {% endfor %}
+                            </select>
+                            <select name="end_year">
+                                <option value="" disabled selected>İl</option>
+                                {% for i in 1990..2017 %}
+                                <option value="{{ i }}">{{ i }}</option>
+                                {% endfor %}
+                            </select>
+                            <p>Simptomlar</p>
+                            <textarea  name="simptoms"></textarea>
+                            <p>Detallar</p>
+                            <textarea  name="details"></textarea>
+                            <div>
+                                <button type="submit">Əlavə et</button>
+                            </div>
+                        </form>
+                    </div>      
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+        </div>
+    </div>      
+</main>
+{% endblock %}

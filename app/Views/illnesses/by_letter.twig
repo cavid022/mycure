@@ -1,0 +1,76 @@
+{% extends 'layouts/main.twig' %}
+{% block content %}
+<main class="ills-name-alphabet">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="container alphabet">
+                   <div class="row">
+                        <div class="col-md-2"></div>
+                    <div class="col-md-8">
+                        <form>
+                            <input type="search" name="" placeholder="Xəstəliyin adını daxil edin">
+                            <a href="#" class="alphabet-search-icon">
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                            </a>
+                            <ul>
+                                <a href="{{path_for('illnesses.by_letter', {letter: 'A'})}}"><li>A</li></a>
+                                <a href="{{path_for('illnesses.by_letter', {letter: 'B'})}}"><li>B</li></a>
+                                <a href="{{path_for('illnesses.by_letter', {letter: 'C'})}}"><li>C</li></a>
+                                <a href="{{path_for('illnesses.by_letter', {letter: 'Ç'})}}"><li>Ç</li></a>
+                                <a href="{{path_for('illnesses.by_letter', {letter: 'D'})}}"><li>D</li></a>
+                                <a href="{{path_for('illnesses.by_letter', {letter: 'E'})}}"><li>E</li></a>
+                                <a href="{{path_for('illnesses.by_letter', {letter: 'Ə'})}}"><li>Ə</li></a>
+                                <a href="{{path_for('illnesses.by_letter', {letter: 'F'})}}"><li>F</li></a>
+                                <a href="{{path_for('illnesses.by_letter', {letter: 'G'})}}"><li>G</li></a>
+                                <a href="{{path_for('illnesses.by_letter', {letter: 'Ğ'})}}"><li>Ğ</li></a>
+                                <a href="{{path_for('illnesses.by_letter', {letter: 'H'})}}"><li>H</li></a>
+                                <a href="{{path_for('illnesses.by_letter', {letter: 'X'})}}"><li>X</li></a>
+                                <a href="{{path_for('illnesses.by_letter', {letter: 'I'})}}"><li>I</li></a>
+                                <a href="{{path_for('illnesses.by_letter', {letter: 'İ'})}}"><li>İ</li></a>
+                                <a href="{{path_for('illnesses.by_letter', {letter: 'J'})}}"><li>J</li></a>
+                                <a href="{{path_for('illnesses.by_letter', {letter: 'K'})}}"><li>K</li></a>
+                                <a href="{{path_for('illnesses.by_letter', {letter: 'Q'})}}"><li>Q</li></a>
+                                <a href="{{path_for('illnesses.by_letter', {letter: 'L'})}}"><li>L</li></a>
+                                <a href="{{path_for('illnesses.by_letter', {letter: 'M'})}}"><li>M</li></a>
+                                <a href="{{path_for('illnesses.by_letter', {letter: 'N'})}}"><li>N</li></a>
+                                <a href="{{path_for('illnesses.by_letter', {letter: 'O'})}}"><li>O</li></a>
+                                <a href="{{path_for('illnesses.by_letter', {letter: 'P'})}}"><li>P</li></a>
+                                <a href="{{path_for('illnesses.by_letter', {letter: 'R'})}}"><li>R</li></a>
+                                <a href="{{path_for('illnesses.by_letter', {letter: 'S'})}}"><li>S</li></a>
+                                <a href="{{path_for('illnesses.by_letter', {letter: 'Ş'})}}"><li>Ş</li></a>
+                                <a href="{{path_for('illnesses.by_letter', {letter: 'T'})}}"><li>T</li></a>
+                                <a href="{{path_for('illnesses.by_letter', {letter: 'U'})}}"><li>U</li></a>
+                                <a href="{{path_for('illnesses.by_letter', {letter: 'Ü'})}}"><li>Ü</li></a>
+                                <a href="{{path_for('illnesses.by_letter', {letter: 'V'})}}"><li>V</li></a>
+                                <a href="{{path_for('illnesses.by_letter', {letter: 'Y'})}}"><li>Y</li></a>
+                                <a href="{{path_for('illnesses.by_letter', {letter: 'Z'})}}"><li>Z</li></a>
+                            </ul>
+                        </form>
+                    </div>
+                    <div class="col-md-2"></div>
+                   </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            {{ letter }}
+                        </div>
+                        <div class="col-md-12">
+                            <ul class="ill-name-alphabet">
+                                {% for illness in illnesses %}
+                                <a href="{{path_for('illnesses.show', {id: illness.id})}}"><li>{{ illness.title }}</li></a>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </main> 
+
+{% endblock %}

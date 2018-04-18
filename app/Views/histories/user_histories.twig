@@ -1,0 +1,48 @@
+{% extends 'layouts/main.twig' %}
+{% block content %}
+<main class="ills">
+	{% include 'partials/upper_tabs.twig' %}
+	<div class="container">
+		<div class="row">
+			{% if histories | length > 0 %}
+			{% for history in histories %}
+			<div class="col-md-6">
+				<div class="history-part">
+					<table>
+						<tr>
+							<td>Xəstəlik</td>
+							<td>{{ history.illness.title }}</td>
+						</tr>
+						<tr>
+							<td>Həkim</td>
+							<td>{{ history.doctor.fullname() }}</td>
+						</tr>
+						<tr>
+							<td>Başlanğıc tarixi</td>
+							<td>{{ history.start_date }}</td>
+						</tr>
+						<tr>
+							<td>Bitmə tarixi</td>
+							<td>{{ history.end_date }}</td>
+						</tr>
+						<tr>
+							<td>Simptomlar</td>
+							<td>{{ history.simptoms }}</td>
+						</tr>
+						<tr>
+							<td>Detallar</td>
+							<td>{{ history.details }}</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			{% endfor %}
+			{% else %}
+			<div class="none">
+				<span>Bu xəstənin qeydə alınmış tarixçəsi yoxdur.</span>
+			</div>
+			{% endif %}
+		</div>
+	</div>
+</main>
+{% endblock %}

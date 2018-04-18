@@ -1,0 +1,48 @@
+{% extends 'layouts/main.twig' %}
+{% block content %}
+<main class="ills payment">
+    {% include 'partials/upper_tabs.twig' %}
+  <div class="payment-part appointment-part">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                </div>
+                <div class="col-md-6">
+                    <div class="payment-part-card appointment-part-card">
+                        <p>Həkimlə təyinat</p>
+                        <form action="{{ path_for('appointments.add.post') }}" method="post">
+                            <select required name="doctor_id">
+                                <option value="" disabled selected>Həkim</option>
+                                  {% for doctor in doctors %}
+                                    <option value="{{ doctor.id }}">{{ doctor.fullname() }} | {{doctor.department.name}} | {{ doctor.department.hospital.name }}</option>
+                                  {% endfor %}
+                            </select>
+                            <select required name="date">
+                                <option value="" disabled selected>Gün</option>
+                                <option value="Bazar Ertəsi">Bazar Ertəsi</option>
+                                <option value="Çərşənbə Axşamı">Çərşənbə Axşamı</option>
+                                <option value="Çərşənbə">Çərşənbə</option>
+                                <option value="Cümə Axşamı">Cümə Axşamı</option>
+                                <option value="Cümə">Cümə</option>
+                                <option value="Şənbə">Şənbə</option>
+                                <option value="Bazar">Bazar</option>
+                            </select>
+                            <select required name="time">
+                                <option value="" disabled selected>Saat</option>
+                                <option value="10:00 - 12:00">10:00 - 12:00</option>
+                                <option value="12:00 - 14:00">12:00 - 14:00</option>
+                                <option value="15:00 - 17:00">15:00 - 17:00</option>
+                                <option value="19:00 - 21:00">19:00 - 21:00</option>
+                            </select>
+                            <div>
+                                <input type="submit" value="Yazıl">
+                            </div>
+                        </form>
+                    </div>      
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+        </div>
+    </div>      
+</main> 
+{% endblock %}

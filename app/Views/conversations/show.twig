@@ -1,0 +1,99 @@
+{% extends 'layouts/main.twig' %} 
+{% block content %}
+<main class="messages-part">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3 col-sm-4">
+				{% for conversation in conversations %}
+				{% if conversation.lastMessageDate()|trim is not empty %}
+				<a href="{{ path_for('conversations.show', {'id': conversation.id}) }}">
+					<div class="msg-card-part active-msg-card">
+						<span>{{ conversation.heading() }}</span>
+						<div class="msg-small-desc">
+							<span>Sən:</span>
+							<span>{{conversation.lastMessage()}}</span>
+							<span>{{conversation.lastMessageDate()}}</span>
+						</div>
+					</div>
+				</a>
+				<hr>
+				{% endif %}
+				{% endfor %}
+			</div>
+			<div class="col-md-9 col-sm-8">
+				<div class="by-whom">
+					{{ conversation.heading() }}
+				</div>
+				<div class="cure-chat">
+					<form action="{{ path_for('ajax.send_message') }}" method="post">
+						<div class="border">
+							<div class="chat">
+								<span></span>
+								<div class="messages">
+									{% for message in messages %}
+									{% if message.user == auth.user.id %}
+									<div class="message">
+										<div class="myMessage">
+											<p>{{ message.body }}</p>
+											<date><b>{{message.user.first_name}}</b> {{ message.created_at | date('d.m.Y H:i:s')}}</date>
+										</div>
+									</div>
+									{% else %}
+									<div class="message">
+										<div class="fromThem">
+											<p>{{ message.body }}</p>
+											<date><b>{{message.user.first_name}}</b> {{ message.created_at | date('d.m.Y H:i:s')}}</date>
+										</div>
+									</div>
+									{% endif %}
+									{% endfor %}
+								</div>
+							</div>
+						</div>
+						<div class="chat-controls">
+    						<input type="hidden" name="conversation_id" id="conversation_id" value="{{ conversation.id }}"></input>
+    						<input name="message" type="text" placeholder="Mesaj yaz">
+    						<button type="submit"><i class='fa fa-paper-plane'></i></button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-8"></div>
+			<div class="col-md-4" style="padding-right: 0;">
+				<div class="by-whom">
+					asd
+				</div>
+			</div>
+		</div>
+	</div>
+</main>
+{% endblock %}
+{% block footer_scripts %} 
+<script>
+	$(document).ready(function() {
+	    load_data();
+	    function load_data(query) {
+	        $.ajax({
+	            url:"{{path_for('ajax.conversations.users_list')}}",
+	            method:"POST",
+	            data:{query:query},
+	            success:function(data) {
+	                $('#result').html(data);
+	            }
+	        });
+	    }
+	    $('#get_users_for_conversation').keyup(function() {
+	        var search = $(this).val();
+	        if(search != '') {
+	            load_data(search);
+	        } else {
+	            load_data();
+	        }
+	    });
+	});
+</script>
+{% endblock %}

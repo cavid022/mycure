@@ -1,0 +1,88 @@
+{% extends 'layouts/main.twig' %}
+{% block content %}
+<main class="ills">
+    {% include 'partials/upper_tabs.twig' %}
+    <div class="results">
+        <div class="container">
+            <div class="row">
+                
+                {% if auth.user.role == "user" or auth.user.role == 'admin' %}
+                
+                <div class="col-md-12">
+                    <p>Sizin labaratoriya nəticələriniz</p>
+                    <div class="line"></div>
+                    <p></p>
+                </div>
+                <div class="col-md-12">
+                    <table>
+                        {% for result in results %}
+                        <tr>
+                            <td>
+                                <p id="result-table-text">Həkim: {{ result.doctor.fullname() }} | {{ result.title }}</p>
+                            </td>
+                            <td>
+                                <div class="results-box">
+                                    <div>
+                                        <ul>
+                                            <a target="_blank" href="{{ base_url() }}/{{ uploads }}/{{ result.file_name }}">
+                                                <li>Bax</li>
+                                            </a>
+                                            <a href="{{ path_for('results.delete.post', {id: result.id} ) }}">
+                                                <li>Sil</li>
+                                            </a>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+                
+                
+                {% elseif auth.user.role == "doctor" %}
+                
+                <div class="col-md-12">
+                    <p>Sizin yüklədiyiniz nəticələr</p>
+                    <div class="line"></div>
+                    <p></p>
+                </div>
+                <div class="col-md-12">
+                    <table>
+                        {% for result in results %}
+                        <tr>
+                            <td>
+                                <p id="result-table-text">Xəstə: {{ result.user.fullname()}} | {{ result.title }}</p>
+                            </td>
+                            <td>
+                                <div class="results-box">
+                                    <div>
+                                        <ul>
+                                            <a target="_blank" href="{{ base_url() }}/uploads/results/{{ result.file_name }}">
+                                                <li>Bax</li>
+                                            </a>
+                                            <a href="{{ path_for('results.delete.post', {id: result.id} ) }}">
+                                                <li>Sil</li>
+                                            </a>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                    <div class="add-result">
+                        <a href="{{ path_for('results.add') }}">Yüklə</a>
+                    </div>
+                </div>
+                
+                {% endif %}
+            
+            </div>
+        </div>    
+    </div>
+</main>
+{% endblock %}
+
+{% block footer_scripts %}
+{% endblock %} 
